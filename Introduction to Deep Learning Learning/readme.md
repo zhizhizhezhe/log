@@ -10,6 +10,7 @@
 <img width="2234" height="1044" alt="image" src="https://github.com/user-attachments/assets/189a66fe-e3b1-43a4-9a60-951136c4dae3" />
 
 5、阅读论文需要回答问题：
+
   （1）总结Abstract和Introduction，直白简要说明本文做了什么
 
   （2）模型输入输出是什么（维度，特征，结构等等）
