@@ -59,6 +59,18 @@ Qwen2.5-14B-GPTQ	ChatIE	41.30%	11.31%	17.76%
 
 * 观察发现在一个句子中LLM会提取多个实体并从中判断出多对三元组，而给定评估的答案则没有这么多候选项，因此准确率大幅下降，之后可能要重新写脚本
 
+# 关于模型增强
+
+## 目前思路是进行一个三阶段 Pipeline：Schema Induction → Triple Extraction → Supervisor Refinement。
+即：先给提示词让提取模型分析以下文本并定义一个提取模式（Schema）。 步骤： 1. 识别文本中的核心实体类型（如：人物、机构、技术、概念）。 2. 定义这些实体之间可能存在的逻辑关系。 3. 以 JSON 格式输出模式定义。再进行三元组提取。提取完后的结果让一个监督模型（可以与提取模型相同或不同）进行监督剔除逻辑矛盾的冗余三元组，目标是三元组不重复不遗漏，最后让提取模型综合原始输出与监督模型的意见完成最终输出
+
+文献支持有：LLMs for Knowledge Graph Construction and Reasoning: Recent Capabilities and Future Opportunities，ChatIE: Zero-Shot Information Extraction via Chatting with ChatGPT证明了思维连引导对于模型的作用；
+Leveraging LLMs Few-shot Learning to Improve
+Instruction-driven Knowledge Graph Construction，SELF-REFINE:
+Iterative Refinement with Self-Feedback论文证明了self-reflection，self-refinement，说明了这种监督审查时有效的
+
+在看文献时知道许多模型输出因为格式谬误而导致输出准确率不高，因此schema设定中特意要求以 JSON 格式输出模式定义。
+
   
 
 
